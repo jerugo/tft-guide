@@ -5,9 +5,24 @@ import sys
 import time
 import threading
 
+import numpy as np
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from flask import Flask, render_template, jsonify, request, send_from_directory
+from flask.json.provider import DefaultJSONProvider
+
+
+class NumpyJSONProvider(DefaultJSONProvider):
+    """numpy 타입 JSON 직렬화 지원"""
+    def default(self, o):
+        if isinstance(o, (np.integer,)):
+            return int(o)
+        if isinstance(o, (np.floating,)):
+            return float(o)
+        if isinstance(o, np.ndarray):
+            return o.tolist()
+        return super().default(o)
 
 from config import COST_COLORS, ICONS_DIR
 from engine.recommender import DeckRecommender
@@ -17,6 +32,8 @@ from data.updater import update_meta, get_last_updated
 
 def create_app(capture=None, detector=None, llm_url=None):
     app = Flask(__name__)
+    app.json_provider_class = NumpyJSONProvider
+    app.json = NumpyJSONProvider(app)
     recommender = DeckRecommender()
     llm = LLMClient(api_url=llm_url) if llm_url else LLMClient()
 

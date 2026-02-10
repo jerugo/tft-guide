@@ -102,18 +102,31 @@ class ScreenCapture:
             return None
         try:
             with mss.mss() as sct:
-                region = self._window_region or _find_tft_window()
-                if region:
-                    self._window_region = region
-                    shot = sct.grab(region)
-                else:
-                    monitor = sct.monitors[1]
-                    shot = sct.grab(monitor)
-                img = np.array(shot)  # BGRA
-                return img[:, :, :3]  # BGR
+                return self._grab(sct)
         except Exception as e:
-            logger.debug(f"캡처 실패: {e}")
+            logger.warning(f"캡처 실패: {e}")
             return None
+
+    def _capture_with_sct(self, sct) -> Optional[np.ndarray]:
+        """기존 mss 인스턴스로 캡처 (쓰레드용)"""
+        if sct is None:
+            return None
+        try:
+            return self._grab(sct)
+        except Exception as e:
+            logger.warning(f"캡처 실패: {e}")
+            return None
+
+    def _grab(self, sct) -> Optional[np.ndarray]:
+        # TFT 창 탐색은 수동으로 refresh_window() 호출 시에만
+        region = self._window_region
+        if region:
+            shot = sct.grab(region)
+        else:
+            monitor = sct.monitors[1]
+            shot = sct.grab(monitor)
+        img = np.array(shot)  # BGRA
+        return img[:, :, :3]  # BGR
 
     def on_frame(self, callback: Callable[[np.ndarray], None]):
         """프레임 콜백 등록"""
@@ -177,9 +190,23 @@ class ScreenCapture:
     def _loop(self):
         fps_frames = 0
         fps_start = time.time()
+        logger.info("캡처 루프 시작")
+        try:
+            # mss는 쓰레드마다 새 인스턴스 필요
+            sct = mss.mss() if mss else None
+            logger.info(f"mss 인스턴스: {sct is not None}")
+        except Exception as e:
+            logger.error(f"mss 초기화 실패: {e}")
+            self._running = False
+            return
 
+        logger.info("캡처 루프 첫 프레임 시도...")
         while self._running:
-            frame = self.capture_once()
+            frame = self._capture_with_sct(sct)
+            if self._frame_count == 0 and frame is not None:
+                logger.info(f"첫 프레임 캡처 성공: {frame.shape}")
+            elif self._frame_count == 0 and frame is None:
+                logger.warning("첫 프레임 캡처 실패")
             if frame is not None:
                 now = time.time()
 

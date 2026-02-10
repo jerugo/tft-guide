@@ -81,7 +81,10 @@ def main():
     print(f"  🤖 LLM: {args.llm_url}")
     print(f"  🎯 템플릿: {detector.template_count}개\n")
 
-    # 캡처는 UI에서 토글 (기본 중지)
+    # 캡처 자동 시작
+    if capture:
+        capture.start()
+
     app.run(host=config.HOST, port=args.port, debug=False)
 
 
