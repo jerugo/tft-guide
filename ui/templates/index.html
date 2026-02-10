@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TFT 가이드</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>⚔️ TFT 가이드</h1>
+    <div class="status">
+      <span><span class="status-dot" id="captureStatus"></span> 캡처</span>
+      <span><span class="status-dot" id="llmStatus"></span> LLM</span>
+      <span id="lastUpdated" style="font-size:0.8rem;color:#666"></span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- 내 챔피언 선택 -->
+    <div class="card full">
+      <h2>🎯 내 챔피언 선택</h2>
+      <div class="input-group">
+        <label>레벨:</label>
+        <select id="levelSelect">
+          {% for l in range(2, 11) %}<option value="{{ l }}" {{ 'selected' if l == 7 }}>{{ l }}</option>{% endfor %}
+        </select>
+        <label>골드:</label>
+        <input type="number" id="goldInput" value="0" min="0" max="999" style="width:70px">
+        <button class="primary" onclick="getRecommendation()">추천 받기</button>
+        <button onclick="clearSelection()">초기화</button>
+      </div>
+      <div id="championGrid">
+        {% for champ in champions %}
+        <span class="champ-tag cost-{{ champ.cost }}" data-name="{{ champ.name }}"
+              onclick="toggleChamp(this)">{{ champ.name_kr }}</span>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- 추천 덱 -->
+    <div class="card">
+      <h2>📊 추천 덱</h2>
+      <div id="recommendations"><p style="color:#666">챔피언을 선택하고 추천 받기를 클릭하세요</p></div>
+    </div>
+
+    <!-- LLM 분석 -->
+    <div class="card">
+      <h2>🤖 AI 분석</h2>
+      <button onclick="getLLMAnalysis()" style="margin-bottom:10px">AI 분석 요청</button>
+      <div class="llm-response" id="llmResponse">LLM 서버 연결 후 분석을 요청하세요</div>
+    </div>
+
+    <!-- 상대 덱 입력 -->
+    <div class="card">
+      <h2>👥 상대 덱 입력</h2>
+      <div id="opponentInputs">
+        <div class="input-group">
+          <input type="text" placeholder="상대1: 챔피언 영문명 쉼표 구분" class="opp-input" style="flex:1">
+        </div>
+      </div>
+      <button onclick="addOpponent()" style="font-size:0.8rem">+ 상대 추가</button>
+    </div>
+
+    <!-- 챔피언 풀 -->
+    <div class="card">
+      <h2>🏊 챔피언 풀 현황</h2>
+      <button onclick="loadPool()" style="margin-bottom:10px;font-size:0.8rem">풀 조회</button>
+      <div id="poolDisplay"></div>
+    </div>
+
+    <!-- 설정 -->
+    <div class="card full">
+      <h2>⚙️ 설정</h2>
+      <div class="settings-row">
+        <label>캡처 주기(초):</label>
+        <input type="number" id="captureInterval" value="2" min="0.5" max="10" step="0.5" style="width:80px">
+        <label>LLM 서버:</label>
+        <input type="text" id="llmUrl" value="http://localhost:11434/v1" style="flex:1">
+        <button onclick="saveSettings()">저장</button>
+      </div>
+      <div class="settings-row">
+        <button onclick="toggleCapture()">캡처 토글</button>
+        <button onclick="updateData()">🔄 데이터 업데이트</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const costColors = {{ cost_colors | tojson }};
+let selectedChamps = new Set();
+
+function toggleChamp(el) {
+  const name = el.dataset.name;
+  if (selectedChamps.has(name)) {
+    selectedChamps.delete(name);
+    el.classList.remove('selected');
+  } else {
+    selectedChamps.add(name);
+    el.classList.add('selected');
+  }
+}
+
+function clearSelection() {
+  selectedChamps.clear();
+  document.querySelectorAll('.champ-tag.selected').forEach(e => e.classList.remove('selected'));
+  document.getElementById('recommendations').innerHTML = '<p style="color:#666">챔피언을 선택하고 추천 받기를 클릭하세요</p>';
+}
+
+function getOpponents() {
+  const inputs = document.querySelectorAll('.opp-input');
+  return [...inputs].map(i => i.value.split(',').map(s => s.trim()).filter(Boolean)).filter(a => a.length);
+}
+
+async function getRecommendation() {
+  const level = parseInt(document.getElementById('levelSelect').value);
+  const el = document.getElementById('recommendations');
+  el.innerHTML = '<div class="spinner"></div>';
+  try {
+    const resp = await fetch('/api/recommend', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({my_champions: [...selectedChamps], opponents: getOpponents(), level})
+    });
+    const data = await resp.json();
+    renderRecommendations(data.recommendations);
+  } catch(e) { el.innerHTML = '<p style="color:red">오류: ' + e.message + '</p>'; }
+}
+
+function renderRecommendations(recs) {
+  const el = document.getElementById('recommendations');
+  if (!recs || !recs.length) { el.innerHTML = '<p style="color:#666">추천 결과 없음</p>'; return; }
+  el.innerHTML = recs.slice(0, 8).map(r => {
+    const tierClass = 'tier-' + r.tier;
+    const needed = r.needed_champions.map(n =>
+      `<span class="champ-tag cost-${getCost(n.name)}" style="font-size:0.7rem">${n.name} (${(n.shop_probability*100).toFixed(1)}%)</span>`
+    ).join('');
+    const owned = r.owned_champions.map(n =>
+      `<span class="champ-tag cost-${getCost(n)}" style="font-size:0.7rem;opacity:0.6">${n}</span>`
+    ).join('');
+    const synergies = (r.synergies||[]).map(s => `<span class="synergy-tag">${s}</span>`).join('');
+    return `<div class="deck-card">
+      <div class="deck-header">
+        <span class="deck-name">${r.deck_name}</span>
+        <span class="tier ${tierClass}">${r.tier}</span>
+      </div>
+      <div class="deck-stats">
+        <span>승률 ${r.win_rate}%</span>
+        <span>픽률 ${r.pick_rate}%</span>
+        <span>매칭 ${(r.match_rate*100).toFixed(0)}%</span>
+        <span>스코어 ${(r.completion_score*100).toFixed(0)}</span>
+      </div>
+      <div>${synergies}</div>
+      <div style="margin-top:6px"><small style="color:#888">보유:</small> ${owned||'없음'}</div>
+      <div style="margin-top:4px"><small style="color:#888">필요:</small> ${needed||'완성!'}</div>
+      <div class="match-bar"><div class="match-fill" style="width:${r.match_rate*100}%"></div></div>
+    </div>`;
+  }).join('');
+}
+
+const champData = {{ champions | tojson }};
+function getCost(name) {
+  const c = champData.find(ch => ch.name === name);
+  return c ? c.cost : 1;
+}
+
+function addOpponent() {
+  const div = document.getElementById('opponentInputs');
+  const n = div.children.length + 1;
+  const row = document.createElement('div');
+  row.className = 'input-group';
+  row.innerHTML = `<input type="text" placeholder="상대${n}: 챔피언 영문명 쉼표 구분" class="opp-input" style="flex:1">`;
+  div.appendChild(row);
+}
+
+async function loadPool() {
+  const el = document.getElementById('poolDisplay');
+  el.innerHTML = '<div class="spinner"></div>';
+  try {
+    const resp = await fetch('/api/pool', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({opponents: getOpponents()})
+    });
+    const data = await resp.json();
+    let html = '';
+    for (const [cost, champs] of Object.entries(data.pool)) {
+      const color = costColors[cost] || '#808080';
+      html += `<h3 style="color:${color};margin:8px 0 4px">${cost}코스트</h3><div class="pool-grid">`;
+      champs.forEach(c => {
+        const pct = c.total ? (c.remaining/c.total*100).toFixed(0) : 0;
+        html += `<div class="pool-item" style="background:${color}22;border:1px solid ${color}44">
+          ${c.name_kr}<br><span class="remaining">${c.remaining}/${c.total}</span></div>`;
+      });
+      html += '</div>';
+    }
+    el.innerHTML = html;
+  } catch(e) { el.innerHTML = '<p style="color:red">오류</p>'; }
+}
+
+async function getLLMAnalysis() {
+  const el = document.getElementById('llmResponse');
+  el.textContent = '분석 중...';
+  try {
+    const resp = await fetch('/api/llm/analyze', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        my_champions: [...selectedChamps],
+        level: parseInt(document.getElementById('levelSelect').value),
+        gold: parseInt(document.getElementById('goldInput').value)
+      })
+    });
+    const data = await resp.json();
+    el.textContent = data.analysis || data.error || 'LLM 응답 없음';
+  } catch(e) { el.textContent = '오류: ' + e.message; }
+}
+
+async function toggleCapture() {
+  await fetch('/api/capture/toggle', {method: 'POST'});
+  checkStatus();
+}
+
+async function saveSettings() {
+  await fetch('/api/settings', {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      capture_interval: parseFloat(document.getElementById('captureInterval').value),
+      llm_url: document.getElementById('llmUrl').value
+    })
+  });
+}
+
+async function updateData() {
+  const resp = await fetch('/api/update', {method: 'POST'});
+  const data = await resp.json();
+  alert(data.message);
+  checkStatus();
+}
+
+async function checkStatus() {
+  try {
+    const [cap, llm, upd] = await Promise.all([
+      fetch('/api/capture/status').then(r=>r.json()),
+      fetch('/api/llm/status').then(r=>r.json()),
+      fetch('/api/last_updated').then(r=>r.json()),
+    ]);
+    document.getElementById('captureStatus').className = 'status-dot ' + (cap.active ? 'active' : 'inactive');
+    document.getElementById('llmStatus').className = 'status-dot ' + (llm.available ? 'active' : 'inactive');
+    document.getElementById('lastUpdated').textContent = '업데이트: ' + (upd.last_updated || '-');
+  } catch(e) {}
+}
+
+checkStatus();
+setInterval(checkStatus, 10000);
+</script>
+</body>
+</html>
