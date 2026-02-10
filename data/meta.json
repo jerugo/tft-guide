@@ -1,69 +1,326 @@
 {
-  "last_updated": "2025-02-10T00:00:00",
-  "source": "manual",
+  "last_updated": "2026-02-10T00:00:00",
+  "season": "Set 16",
+  "patch": "v16.4",
+  "source": "롤체지지",
   "decks": [
     {
-      "name": "정복자 리롤",
+      "name": "킨드레드 루시안 밸류",
       "tier": "S",
-      "win_rate": 12.8,
-      "pick_rate": 8.5,
-      "core_champions": ["Darius", "Draven", "Rell", "Cassiopeia", "Swain", "Ambessa", "Renni", "MissFortune"],
-      "core_items": ["대왕검", "피바라기", "거인의 결의"],
-      "synergies": ["Conqueror 6", "Pit Fighter 2"]
+      "score": 117,
+      "champions": ["드레이븐", "스웨인", "스카너", "암베사", "타릭", "루시안과 세나", "쉬바나", "킨드레드", "피들스틱"],
+      "synergies": []
     },
     {
-      "name": "반란군 소서러",
+      "name": "벨베스 암베사 밸류",
       "tier": "S",
-      "win_rate": 12.5,
-      "pick_rate": 7.2,
-      "core_champions": ["Irelia", "Akali", "Sett", "Vex", "Zoe", "Illaoi", "Jinx"],
-      "core_items": ["대천사의 지팡이", "주문도둑검", "이온 불꽃망토"],
-      "synergies": ["Rebel 5", "Sorcerer 4"]
+      "score": 114,
+      "hot": true,
+      "champions": ["사이온", "벨베스", "스웨인", "암베사", "협곡의 전령", "루시안과 세나", "쉬바나", "아트록스", "피들스틱"],
+      "synergies": []
     },
     {
-      "name": "법집행관 저격수",
+      "name": "밸류 아우솔",
+      "tier": "S",
+      "score": 111,
+      "champions": ["니코", "바이", "다이애나", "세라핀", "스웨인", "타릭", "쉬바나", "아지르", "아우렐리온 솔"],
+      "synergies": []
+    },
+    {
+      "name": "빌지워터 라이즈",
+      "tier": "S",
+      "score": 111,
+      "champions": ["일라오이", "코부코와 유미", "리산드라", "브라움", "타릭", "피즈", "볼리베어", "탐 켄치", "라이즈"],
+      "synergies": []
+    },
+    {
+      "name": "비전 마법사 애니 밸류",
+      "tier": "S",
+      "score": 111,
+      "champions": ["티버", "케넨", "코부코와 유미", "오공", "루시안과 세나", "세트", "애니", "질리언", "사일러스"],
+      "synergies": []
+    },
+    {
+      "name": "5빌지워터 트페",
+      "tier": "S",
+      "score": 111,
+      "champions": ["트위스티드 페이트", "노틸러스", "미스 포츈", "오공", "피즈", "루시안과 세나", "쉬바나", "킨드레드", "탐 켄치"],
+      "synergies": []
+    },
+    {
+      "name": "아이오니아 유나라",
+      "tier": "S",
+      "score": 105,
+      "hot": true,
+      "champions": ["쉔", "아리", "스웨인", "오공", "유나라", "타릭", "세트", "쉬바나", "킨드레드"],
+      "synergies": []
+    },
+    {
+      "name": "파수꾼 칼리스타",
+      "tier": "S",
+      "score": 105,
+      "champions": ["요릭", "그웬", "로리스", "브라움", "세라핀", "칼리스타", "쓰레쉬", "오른", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "아이오니아 야스오 요네",
+      "tier": "S",
+      "score": 105,
+      "champions": ["쉔", "야스오", "벨베스", "오공", "요네", "루시안과 세나", "세트", "아트록스", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "빌지워터 미스 포츈",
+      "tier": "S",
+      "score": 105,
+      "champions": ["일라오이", "트위스티드 페이트", "노틸러스", "미스 포츈", "루시안과 세나", "쉬바나", "오른", "킨드레드", "탐 켄치"],
+      "synergies": []
+    },
+    {
+      "name": "녹서스 멜 밸류",
+      "tier": "S",
+      "score": 105,
+      "champions": ["니코", "바이", "세라핀", "스웨인", "암베사", "타릭", "멜", "쉬바나", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "다이애나 세라핀 밸류",
+      "tier": "S",
+      "score": 105,
+      "champions": ["니코", "바이", "다이애나", "세라핀", "스웨인", "타릭", "쉬바나", "아지르", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "4기원자 리산드라",
       "tier": "A",
-      "win_rate": 11.9,
-      "pick_rate": 6.8,
-      "core_champions": ["Maddie", "Camille", "TwistedFate", "Vi", "Loris", "Ekko", "Caitlyn"],
-      "core_items": ["무한의 대검", "거인 학살자", "수호천사"],
-      "synergies": ["Enforcer 4", "Sniper 2"]
+      "score": 102,
+      "champions": ["애니비아", "세주아니", "코부코와 유미", "리산드라", "브라움", "타릭", "볼리베어", "오른", "질리언"],
+      "synergies": []
     },
     {
-      "name": "실험체 브루저",
+      "name": "자운 직스 라이즈",
       "tier": "A",
-      "win_rate": 11.5,
-      "pick_rate": 5.9,
-      "core_champions": ["Trundle", "Zyra", "Scar", "DrMundo", "Warwick", "Singed", "RenataGlasc"],
-      "core_items": ["따뜻한 갑옷", "용의 발톱", "워모그의 갑옷"],
-      "synergies": ["Experiment 4", "Chemist 3", "Bruiser 2"]
+      "score": 102,
+      "champions": ["케이틀린", "바이", "문도 박사", "케넨", "오공", "타릭", "세트", "직스", "라이즈"],
+      "synergies": []
     },
     {
-      "name": "아카데미 포병",
+      "name": "난동꾼 라이즈",
       "tier": "A",
-      "win_rate": 11.2,
-      "pick_rate": 5.5,
-      "core_champions": ["Lux", "Leona", "Ezreal", "Heimerdinger", "Jayce", "Tristana", "Corki"],
-      "core_items": ["구인수의 격노검", "자이언트 슬레이어", "최후의 속삭임"],
-      "synergies": ["Academy 3", "Artillerist 4"]
+      "score": 102,
+      "champions": ["쉔", "세주아니", "케넨", "코부코와 유미", "리산드라", "오공", "타릭", "볼리베어", "라이즈"],
+      "synergies": []
     },
     {
-      "name": "오토마타 감시자",
+      "name": "유나라이즈",
+      "tier": "A",
+      "score": 102,
+      "champions": ["애쉬", "세주아니", "케넨", "코부코와 유미", "리산드라", "오공", "유나라", "타릭", "라이즈"],
+      "synergies": []
+    },
+    {
+      "name": "4전기 4학살자 벨베스",
+      "tier": "A",
+      "score": 99,
+      "champions": ["브라이어", "초가스", "갱플랭크", "벨베스", "스웨인", "암베사", "쉬바나", "아트록스", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "4전기 4공허 카이사",
+      "tier": "A",
+      "score": 96,
+      "champions": ["코그모", "초가스", "문도 박사", "스웨인", "신지드", "카이사", "협곡의 전령", "쉬바나", "직스"],
+      "synergies": []
+    },
+    {
+      "name": "7데마시아 럭스",
+      "tier": "A",
+      "score": 96,
+      "champions": ["소나", "자르반 4세", "뽀삐", "신 짜오", "가렌", "럭스", "스웨인", "타릭", "갈리오", "질리언"],
+      "synergies": []
+    },
+    {
+      "name": "자운 워윅",
+      "tier": "A",
+      "score": 96,
+      "champions": ["니코", "바이", "에코", "세라핀", "스웨인", "신지드", "워윅", "직스", "킨드레드"],
+      "synergies": []
+    },
+    {
+      "name": "데마시아 소나 리롤",
+      "tier": "A",
+      "score": 96,
+      "champions": ["소나", "자르반 4세", "뽀삐", "신 짜오", "가렌", "럭스", "스웨인", "타릭", "갈리오", "질리언"],
+      "synergies": []
+    },
+    {
+      "name": "아이오니아 자헨",
+      "tier": "A",
+      "score": 96,
+      "champions": ["쉔", "야스오", "오공", "요네", "유나라", "세트", "오른", "자헨"],
+      "synergies": []
+    },
+    {
+      "name": "4필트 리산드라 세라핀",
+      "tier": "A",
+      "score": 93,
+      "champions": ["바이", "오리아나", "로리스", "세주아니", "레넥톤", "리산드라", "브라움", "세라핀", "아지르"],
+      "synergies": []
+    },
+    {
+      "name": "기동타격대 워윅",
+      "tier": "A",
+      "score": 93,
+      "champions": ["바이", "애쉬", "로리스", "세주아니", "징크스", "브라움", "워윅", "루시안과 세나", "킨드레드"],
+      "synergies": []
+    },
+    {
+      "name": "7녹서스 암베사 멜",
+      "tier": "A",
+      "score": 93,
+      "champions": ["브라이어", "사이온", "다리우스", "드레이븐", "레넥톤", "스웨인", "암베사", "멜", "아지르"],
+      "synergies": []
+    },
+    {
+      "name": "필트오버 T-헥스",
+      "tier": "A",
+      "score": 93,
+      "champions": ["자르반 4세", "케이틀린", "바이", "로리스", "브라움", "루시안과 세나", "오른", "피들스틱", "T-헥스"],
+      "synergies": []
+    },
+    {
+      "name": "슈리마 아지르 애니",
+      "tier": "A",
+      "score": 93,
+      "champions": ["티버", "니코", "바이", "레넥톤", "세라핀", "스웨인", "아지르", "애니", "제라스"],
+      "synergies": []
+    },
+    {
+      "name": "토벌자 갱플랭크 암베사",
+      "tier": "A",
+      "score": 90,
+      "champions": ["일라오이", "사이온", "갱플랭크", "노틸러스", "벨베스", "스웨인", "암베사", "타릭", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "데마시아 자헨",
       "tier": "B",
-      "win_rate": 10.8,
-      "pick_rate": 4.2,
-      "core_champions": ["Jhin", "Nocturne", "Cobalt", "Garen", "Malzahar", "Darius"],
-      "core_items": ["수호천사", "이온 불꽃망토", "태양불꽃 망토"],
-      "synergies": ["Automata 4", "Watcher 2"]
+      "score": 87,
+      "champions": ["소나", "자르반 4세", "뽀삐", "오리아나", "로리스", "가렌", "럭스", "갈리오", "자헨"],
+      "synergies": []
     },
     {
-      "name": "비전가 서포트",
+      "name": "5그림자 군도 비에고",
       "tier": "B",
-      "win_rate": 10.5,
-      "pick_rate": 3.8,
-      "core_champions": ["Morgana", "Vex", "RenataGlasc", "Heimerdinger", "LeBlanc", "Malzahar"],
-      "core_items": ["대천사의 지팡이", "모렐로노미콘", "초시계"],
-      "synergies": ["Visionary 4", "Sorcerer 2"]
+      "score": 87,
+      "champions": ["비에고", "요릭", "그웬", "브라움", "칼리스타", "쓰레쉬", "오른", "피들스틱"],
+      "synergies": []
+    },
+    {
+      "name": "7데마시아 베인",
+      "tier": "B",
+      "score": 87,
+      "champions": ["자르반 4세", "뽀삐", "신 짜오", "베인", "가렌", "럭스", "스웨인", "카이사", "갈리오"],
+      "synergies": []
+    },
+    {
+      "name": "8요들 베이가 직스",
+      "tier": "B",
+      "score": 84,
+      "champions": ["럼블", "뽀삐", "티모", "케넨", "코부코와 유미", "베이가", "스웨인", "피즈", "직스"],
+      "synergies": []
+    },
+    {
+      "name": "[밴들 현상금] 10요들",
+      "tier": "B",
+      "score": 81,
+      "champions": ["럼블", "룰루", "뽀삐", "트리스타나", "티모", "케넨", "코부코와 유미", "베이가", "피즈", "직스"],
+      "synergies": []
+    },
+    {
+      "name": "공허 카이사",
+      "tier": "B",
+      "score": 75,
+      "hot": true,
+      "champions": ["코그모", "렉사이", "초가스", "벨베스", "스웨인", "오공", "카이사", "협곡의 전령"],
+      "synergies": []
+    },
+    {
+      "name": "이쉬탈 바드",
+      "tier": "B",
+      "score": 78,
+      "champions": ["니코", "바드", "바이", "오리아나", "밀리오", "니달리", "스카너", "브록"],
+      "synergies": []
+    },
+    {
+      "name": "이쉬탈 밀리오 아리",
+      "tier": "B",
+      "score": 78,
+      "champions": ["니코", "밀리오", "아리", "케넨", "코부코와 유미", "스카너", "오공", "타릭"],
+      "synergies": []
+    },
+    {
+      "name": "[믿음의 도약] 일라오이",
+      "tier": "B",
+      "score": 78,
+      "champions": ["일라오이", "그레이브즈", "갱플랭크", "노틸러스", "미스 포츈", "스웨인", "피즈", "탐 켄치"],
+      "synergies": []
+    },
+    {
+      "name": "3자운 에코 니달리",
+      "tier": "B",
+      "score": 78,
+      "champions": ["니코", "바이", "에코", "니달리", "세라핀", "스웨인", "신지드", "타릭"],
+      "synergies": []
+    },
+    {
+      "name": "자운 신지드 세라핀",
+      "tier": "B",
+      "score": 78,
+      "champions": ["니코", "바이", "말자하", "문도 박사", "세라핀", "스웨인", "신지드", "협곡의 전령"],
+      "synergies": []
+    },
+    {
+      "name": "7자운 징크스 리롤",
+      "tier": "C",
+      "score": 72,
+      "champions": ["블리츠크랭크", "바이", "에코", "문도 박사", "징크스", "신지드", "워윅", "루시안과 세나"],
+      "synergies": []
+    },
+    {
+      "name": "[2만한 가치] 아펠",
+      "tier": "C",
+      "score": 69,
+      "champions": ["니코", "바드", "바이", "아펠리오스", "로리스", "니달리", "스웨인", "타릭"],
+      "synergies": []
+    },
+    {
+      "name": "파수꾼 드레이븐 리롤",
+      "tier": "C",
+      "score": 69,
+      "champions": ["브라이어", "트위스티드 페이트", "갱플랭크", "노틸러스", "드레이븐", "로리스", "세라핀", "암베사"],
+      "synergies": []
+    },
+    {
+      "name": "기동타격대 애쉬 트린",
+      "tier": "C",
+      "score": 66,
+      "champions": ["브라이어", "니코", "애쉬", "트린다미어", "드레이븐", "세주아니", "스웨인", "킨드레드"],
+      "synergies": []
+    },
+    {
+      "name": "6난동꾼 바드 아펠리오스",
+      "tier": "C",
+      "score": 60,
+      "champions": ["쉔", "일라오이", "바드", "사이온", "아펠리오스", "코부코와 유미", "오공", "볼리베어"],
+      "synergies": []
+    },
+    {
+      "name": "[미사일 폭격] 럼블",
+      "tier": "C",
+      "score": 54,
+      "champions": ["럼블", "룰루", "뽀삐", "트리스타나", "티모", "케넨", "코부코와 유미", "피즈"],
+      "synergies": []
     }
   ]
 }
