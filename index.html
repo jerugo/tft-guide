@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TFT 가이드 - Set 13</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0f0f1a;--card:#1a1a2e;--card2:#16213e;--accent:#e94560;--accent2:#0f3460;--text:#eee;--text2:#aaa;--cost1:#888;--cost2:#2ecc71;--cost3:#3498db;--cost4:#9b59b6;--cost5:#f1c40f;--tier-s:#ff6b35;--tier-a:#3498db;--tier-b:#95a5a6}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+.container{max-width:800px;margin:0 auto;padding:12px}
+h1{text-align:center;font-size:1.5rem;padding:16px 0;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tabs{display:flex;gap:4px;margin-bottom:16px;overflow-x:auto}
+.tab{flex:1;padding:10px;text-align:center;background:var(--card);border:none;color:var(--text2);border-radius:8px;cursor:pointer;font-size:.85rem;white-space:nowrap}
+.tab.active{background:var(--accent);color:#fff}
+/* Champion Grid */
+.champ-section{margin-bottom:16px}
+.champ-section h3{font-size:.8rem;color:var(--text2);margin-bottom:8px;padding-left:4px}
+.champ-grid{display:flex;flex-wrap:wrap;gap:6px}
+.champ{width:56px;height:56px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;text-align:center;cursor:pointer;border:2px solid transparent;transition:.15s;padding:2px;line-height:1.1;font-weight:600;position:relative}
+.champ:hover{transform:scale(1.1);z-index:1}
+.champ.selected{border-color:#fff;box-shadow:0 0 10px rgba(233,69,96,.6)}
+.champ.opponent{border-color:var(--accent);box-shadow:0 0 8px rgba(233,69,96,.4)}
+.cost1{background:linear-gradient(135deg,#444,#666);color:#ddd}
+.cost2{background:linear-gradient(135deg,#1a6b3c,#2ecc71);color:#fff}
+.cost3{background:linear-gradient(135deg,#1a5276,#3498db);color:#fff}
+.cost4{background:linear-gradient(135deg,#6c3483,#9b59b6);color:#fff}
+.cost5{background:linear-gradient(135deg,#b7950b,#f1c40f);color:#333}
+/* Deck Cards */
+.deck-card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px;border-left:4px solid}
+.deck-card.tier-S{border-color:var(--tier-s)}
+.deck-card.tier-A{border-color:var(--tier-a)}
+.deck-card.tier-B{border-color:var(--tier-b)}
+.deck-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.deck-name{font-weight:700;font-size:1rem}
+.deck-tier{font-weight:700;font-size:.85rem;padding:2px 10px;border-radius:12px;color:#fff}
+.tier-S .deck-tier{background:var(--tier-s)}
+.tier-A .deck-tier{background:var(--tier-a)}
+.tier-B .deck-tier{background:var(--tier-b)}
+.deck-stats{display:flex;gap:16px;font-size:.8rem;color:var(--text2);margin-bottom:8px}
+.deck-stats span{display:flex;align-items:center;gap:4px}
+.match-bar{height:6px;background:#333;border-radius:3px;overflow:hidden;margin:6px 0}
+.match-fill{height:100%;border-radius:3px;transition:width .3s}
+.match-pct{font-size:.85rem;font-weight:700;color:var(--accent)}
+.deck-champs{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.deck-champ{font-size:.7rem;padding:3px 7px;border-radius:6px;font-weight:600}
+.deck-champ.have{opacity:1}
+.deck-champ.need{opacity:.45;border:1px dashed #666}
+.deck-items{font-size:.75rem;color:var(--text2);margin-top:8px}
+.deck-synergies{display:flex;gap:4px;flex-wrap:wrap;margin-top:4px}
+.synergy-tag{font-size:.7rem;padding:2px 8px;background:var(--accent2);border-radius:10px;color:#ccc}
+/* Capture */
+.capture-area{text-align:center;padding:20px}
+.capture-btn{background:var(--accent);color:#fff;border:none;padding:12px 24px;border-radius:8px;font-size:1rem;cursor:pointer}
+.capture-btn:hover{opacity:.85}
+.capture-img{max-width:100%;margin-top:12px;border-radius:8px;border:2px solid var(--card2)}
+/* Opponent */
+.opponent-info{background:var(--card);border-radius:10px;padding:12px;margin-top:12px}
+.opponent-info h3{font-size:.85rem;margin-bottom:8px;color:var(--accent)}
+.pool-info{font-size:.8rem;color:var(--text2);margin-top:8px}
+.pool-item{display:flex;justify-content:space-between;padding:2px 0}
+/* Section labels */
+.section-label{font-size:.9rem;font-weight:700;margin:16px 0 8px;color:var(--text2)}
+.clear-btn{background:none;border:1px solid var(--text2);color:var(--text2);padding:4px 12px;border-radius:6px;font-size:.75rem;cursor:pointer;margin-left:8px}
+.clear-btn:hover{border-color:var(--accent);color:var(--accent)}
+.empty-msg{text-align:center;color:var(--text2);padding:40px 20px;font-size:.9rem}
+.hidden{display:none}
+/* Pool table */
+.pool-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:8px}
+.pool-table th,.pool-table td{padding:4px 8px;text-align:left;border-bottom:1px solid #333}
+.pool-table th{color:var(--text2)}
+.pool-depleted{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚔️ TFT 가이드 - Set 13</h1>
+  
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('board')">🎮 내 보드</button>
+    <button class="tab" onclick="showTab('capture')">📸 화면 캡처</button>
+    <button class="tab" onclick="showTab('opponent')">👁️ 상대 덱</button>
+  </div>
+
+  <!-- Board Tab -->
+  <div id="tab-board">
+    <div class="section-label">내 챔피언 선택 <button class="clear-btn" onclick="clearBoard()">초기화</button></div>
+    <div id="champ-picker"></div>
+    
+    <div class="section-label" style="margin-top:20px">🏆 추천 덱</div>
+    <div id="recommendations"><div class="empty-msg">챔피언을 선택하면 메타 덱을 추천해드립니다</div></div>
+  </div>
+
+  <!-- Capture Tab -->
+  <div id="tab-capture" class="hidden">
+    <div class="capture-area">
+      <button class="capture-btn" onclick="captureScreen()">📸 화면 캡처하기</button>
+      <p style="font-size:.8rem;color:var(--text2);margin-top:8px">TFT 게임 화면을 캡처합니다 (2단계에서 자동 인식 예정)</p>
+      <img id="capture-preview" class="capture-img hidden">
+    </div>
+  </div>
+
+  <!-- Opponent Tab -->
+  <div id="tab-opponent" class="hidden">
+    <div class="section-label">상대방 챔피언 입력 <button class="clear-btn" onclick="clearOpponent()">초기화</button></div>
+    <div id="opponent-picker"></div>
+    
+    <div id="pool-analysis" class="opponent-info hidden">
+      <h3>🎱 챔피언 풀 분석</h3>
+      <p style="font-size:.8rem;color:var(--text2);margin-bottom:8px">상대가 가져간 챔피언으로 풀에서 빠진 수 계산</p>
+      <div id="pool-details"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+let champions = [];
+let metaDecks = [];
+let myBoard = new Set();
+let opponentBoard = new Set();
+
+const POOL_SIZE = {1:29, 2:22, 3:18, 4:12, 5:10};
+
+async function init() {
+  const [champRes, metaRes] = await Promise.all([
+    fetch('data/champions.json').then(r=>r.json()),
+    fetch('data/meta.json').then(r=>r.json())
+  ]);
+  champions = champRes;
+  metaDecks = metaRes;
+  renderPicker('champ-picker', 'board');
+  renderPicker('opponent-picker', 'opponent');
+}
+
+function renderPicker(containerId, mode) {
+  const el = document.getElementById(containerId);
+  const byCost = {};
+  champions.forEach(c => {
+    if (!byCost[c.cost]) byCost[c.cost] = [];
+    byCost[c.cost].push(c);
+  });
+  
+  let html = '';
+  for (let cost = 1; cost <= 5; cost++) {
+    if (!byCost[cost]) continue;
+    html += `<div class="champ-section"><h3>코스트 ${cost} (${byCost[cost].length})</h3><div class="champ-grid">`;
+    byCost[cost].forEach(c => {
+      const set = mode === 'board' ? myBoard : opponentBoard;
+      const cls = set.has(c.name) ? (mode === 'board' ? 'selected' : 'opponent') : '';
+      html += `<div class="champ cost${cost} ${cls}" onclick="toggleChamp('${c.name}','${mode}')" title="${c.traits.join(', ')}">${c.name}</div>`;
+    });
+    html += '</div></div>';
+  }
+  el.innerHTML = html;
+}
+
+function toggleChamp(name, mode) {
+  const set = mode === 'board' ? myBoard : opponentBoard;
+  if (set.has(name)) set.delete(name); else set.add(name);
+  renderPicker(mode === 'board' ? 'champ-picker' : 'opponent-picker', mode);
+  if (mode === 'board') updateRecommendations();
+  if (mode === 'opponent') updatePoolAnalysis();
+}
+
+function clearBoard() {
+  myBoard.clear();
+  renderPicker('champ-picker', 'board');
+  updateRecommendations();
+}
+
+function clearOpponent() {
+  opponentBoard.clear();
+  renderPicker('opponent-picker', 'opponent');
+  updatePoolAnalysis();
+}
+
+function updateRecommendations() {
+  const el = document.getElementById('recommendations');
+  if (myBoard.size === 0) {
+    el.innerHTML = '<div class="empty-msg">챔피언을 선택하면 메타 덱을 추천해드립니다</div>';
+    return;
+  }
+  
+  const scored = metaDecks.map(deck => {
+    const have = deck.champions.filter(c => myBoard.has(c));
+    const need = deck.champions.filter(c => !myBoard.has(c));
+    const matchPct = Math.round((have.length / deck.champions.length) * 100);
+    return {...deck, have, need, matchPct};
+  }).sort((a, b) => b.matchPct - a.matchPct || b.winRate - a.winRate);
+
+  el.innerHTML = scored.map(d => {
+    const color = d.matchPct >= 70 ? '#2ecc71' : d.matchPct >= 40 ? '#f39c12' : '#e74c3c';
+    const champCost = name => {
+      const c = champions.find(ch => ch.name === name);
+      return c ? c.cost : 1;
+    };
+    return `
+    <div class="deck-card tier-${d.tier}">
+      <div class="deck-header">
+        <span class="deck-name">${d.name}</span>
+        <span class="deck-tier">${d.tier}</span>
+      </div>
+      <div class="deck-stats">
+        <span>승률 ${d.winRate}%</span>
+        <span>픽률 ${d.pickRate}%</span>
+        <span class="match-pct">${d.matchPct}% 매칭</span>
+      </div>
+      <div class="match-bar"><div class="match-fill" style="width:${d.matchPct}%;background:${color}"></div></div>
+      <div class="deck-champs">
+        ${d.have.map(c=>`<span class="deck-champ have cost${champCost(c)}">${c} ✓</span>`).join('')}
+        ${d.need.map(c=>`<span class="deck-champ need cost${champCost(c)}">${c}</span>`).join('')}
+      </div>
+      <div class="deck-synergies">${d.synergies.map(s=>`<span class="synergy-tag">${s}</span>`).join('')}</div>
+      <div class="deck-items">${Object.entries(d.coreItems||{}).map(([ch,items])=>`<b>${ch}:</b> ${items.join(', ')}`).join(' | ')}</div>
+    </div>`;
+  }).join('');
+}
+
+function updatePoolAnalysis() {
+  const el = document.getElementById('pool-analysis');
+  const details = document.getElementById('pool-details');
+  if (opponentBoard.size === 0) { el.classList.add('hidden'); return; }
+  el.classList.remove('hidden');
+  
+  const taken = {};
+  opponentBoard.forEach(name => {
+    const c = champions.find(ch => ch.name === name);
+    if (c) taken[name] = {cost: c.cost, pool: POOL_SIZE[c.cost], remaining: POOL_SIZE[c.cost] - 1};
+  });
+  
+  // Check impact on my board targets
+  const impacted = [];
+  metaDecks.forEach(deck => {
+    const overlap = deck.champions.filter(c => opponentBoard.has(c));
+    if (overlap.length > 0) impacted.push({deck: deck.name, affected: overlap});
+  });
+
+  details.innerHTML = `
+    <table class="pool-table">
+      <tr><th>챔피언</th><th>코스트</th><th>전체 풀</th><th>남은 수</th></tr>
+      ${Object.entries(taken).map(([name, d]) => 
+        `<tr><td>${name}</td><td>${d.cost}</td><td>${d.pool}</td><td class="${d.remaining < d.pool * 0.5 ? 'pool-depleted' : ''}">${d.remaining}</td></tr>`
+      ).join('')}
+    </table>
+    ${impacted.length ? `<div style="margin-top:12px;font-size:.8rem"><b>⚠️ 영향받는 메타 덱:</b><br>${impacted.map(i=>`${i.deck}: ${i.affected.join(', ')} 경쟁중`).join('<br>')}</div>` : ''}
+  `;
+}
+
+async function captureScreen() {
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({video:true});
+    const track = stream.getVideoTracks()[0];
+    const canvas = document.createElement('canvas');
+    const video = document.createElement('video');
+    video.srcObject = stream;
+    await video.play();
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0);
+    track.stop();
+    const img = document.getElementById('capture-preview');
+    img.src = canvas.toDataURL('image/png');
+    img.classList.remove('hidden');
+  } catch(e) {
+    console.error('캡처 실패:', e);
+  }
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tabs .tab').forEach((t,i) => {
+    t.classList.toggle('active', t.textContent.includes(
+      name==='board'?'내 보드':name==='capture'?'화면 캡처':'상대 덱'
+    ));
+  });
+  ['board','capture','opponent'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('hidden', t!==name);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
