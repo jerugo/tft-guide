@@ -1,96 +1,950 @@
 [
-  {"name": "코그모", "name_kr": "코그모", "cost": 1, "traits": ["공허", "포수"]},
-  {"name": "럼블", "name_kr": "럼블", "cost": 1, "traits": ["요들", "포수"]},
-  {"name": "뽀삐", "name_kr": "뽀삐", "cost": 1, "traits": ["요들", "데마시아", "파수꾼"]},
-  {"name": "소나", "name_kr": "소나", "cost": 1, "traits": ["데마시아", "마법사"]},
-  {"name": "블리츠크랭크", "name_kr": "블리츠크랭크", "cost": 1, "traits": ["자운", "파수꾼"]},
-  {"name": "자르반 4세", "name_kr": "자르반 4세", "cost": 1, "traits": ["데마시아", "전사"]},
-  {"name": "케이틀린", "name_kr": "케이틀린", "cost": 1, "traits": ["필트오버", "저격수"]},
-  {"name": "일라오이", "name_kr": "일라오이", "cost": 1, "traits": ["빌지워터", "난동꾼"]},
-  {"name": "쉔", "name_kr": "쉔", "cost": 1, "traits": ["아이오니아", "파수꾼"]},
-  {"name": "니코", "name_kr": "니코", "cost": 1, "traits": ["이쉬탈", "마법사"]},
-  {"name": "바이", "name_kr": "바이", "cost": 1, "traits": ["필트오버", "자운", "투사"]},
-  {"name": "트위스티드 페이트", "name_kr": "트위스티드 페이트", "cost": 2, "traits": ["빌지워터", "기동타격대"]},
-  {"name": "브라이어", "name_kr": "브라이어", "cost": 2, "traits": ["녹서스", "학살자"]},
-  {"name": "렉사이", "name_kr": "렉사이", "cost": 2, "traits": ["공허", "난동꾼"]},
-  {"name": "애쉬", "name_kr": "애쉬", "cost": 2, "traits": ["기동타격대", "저격수"]},
-  {"name": "에코", "name_kr": "에코", "cost": 2, "traits": ["자운", "기동타격대"]},
-  {"name": "티모", "name_kr": "티모", "cost": 2, "traits": ["요들", "마법사"]},
-  {"name": "사이온", "name_kr": "사이온", "cost": 2, "traits": ["녹서스", "난동꾼"]},
-  {"name": "다리우스", "name_kr": "다리우스", "cost": 2, "traits": ["녹서스", "전사"]},
-  {"name": "신 짜오", "name_kr": "신 짜오", "cost": 2, "traits": ["데마시아", "전사"]},
-  {"name": "아리", "name_kr": "아리", "cost": 2, "traits": ["아이오니아", "마법사"]},
-  {"name": "바드", "name_kr": "바드", "cost": 2, "traits": ["이쉬탈", "난동꾼"]},
-  {"name": "룰루", "name_kr": "룰루", "cost": 2, "traits": ["요들", "마법사"]},
-  {"name": "트리스타나", "name_kr": "트리스타나", "cost": 2, "traits": ["요들", "저격수"]},
-  {"name": "그레이브즈", "name_kr": "그레이브즈", "cost": 2, "traits": ["빌지워터", "투사"]},
-  {"name": "야스오", "name_kr": "야스오", "cost": 2, "traits": ["아이오니아", "기동타격대"]},
-  {"name": "티버", "name_kr": "티버", "cost": 2, "traits": ["슈리마", "파수꾼"]},
-  {"name": "초가스", "name_kr": "초가스", "cost": 3, "traits": ["공허", "전기"]},
-  {"name": "오리아나", "name_kr": "오리아나", "cost": 3, "traits": ["필트오버", "마법사"]},
-  {"name": "갱플랭크", "name_kr": "갱플랭크", "cost": 3, "traits": ["빌지워터", "토벌자"]},
-  {"name": "노틸러스", "name_kr": "노틸러스", "cost": 3, "traits": ["빌지워터", "파수꾼"]},
-  {"name": "드레이븐", "name_kr": "드레이븐", "cost": 3, "traits": ["녹서스", "학살자"]},
-  {"name": "문도 박사", "name_kr": "문도 박사", "cost": 3, "traits": ["자운", "난동꾼"]},
-  {"name": "레넥톤", "name_kr": "레넥톤", "cost": 3, "traits": ["슈리마", "녹서스", "전사"]},
-  {"name": "세주아니", "name_kr": "세주아니", "cost": 3, "traits": ["기원자", "파수꾼"]},
-  {"name": "로리스", "name_kr": "로리스", "cost": 3, "traits": ["필트오버", "파수꾼"]},
-  {"name": "케넨", "name_kr": "케넨", "cost": 3, "traits": ["요들", "난동꾼"]},
-  {"name": "스웨인", "name_kr": "스웨인", "cost": 3, "traits": ["녹서스", "전기", "마법사"]},
-  {"name": "징크스", "name_kr": "징크스", "cost": 3, "traits": ["자운", "저격수"]},
-  {"name": "니달리", "name_kr": "니달리", "cost": 3, "traits": ["이쉬탈", "기동타격대"]},
-  {"name": "아펠리오스", "name_kr": "아펠리오스", "cost": 3, "traits": ["난동꾼", "저격수"]},
-  {"name": "신지드", "name_kr": "신지드", "cost": 3, "traits": ["자운", "공허"]},
-  {"name": "밀리오", "name_kr": "밀리오", "cost": 3, "traits": ["이쉬탈", "마법사"]},
-  {"name": "말자하", "name_kr": "말자하", "cost": 3, "traits": ["공허", "마법사"]},
-  {"name": "요릭", "name_kr": "요릭", "cost": 4, "traits": ["그림자 군도", "파수꾼"]},
-  {"name": "그웬", "name_kr": "그웬", "cost": 4, "traits": ["그림자 군도", "기동타격대"]},
-  {"name": "벨베스", "name_kr": "벨베스", "cost": 4, "traits": ["공허", "전기", "학살자"]},
-  {"name": "오공", "name_kr": "오공", "cost": 4, "traits": ["아이오니아", "난동꾼"]},
-  {"name": "암베사", "name_kr": "암베사", "cost": 4, "traits": ["녹서스", "학살자"]},
-  {"name": "가렌", "name_kr": "가렌", "cost": 4, "traits": ["데마시아", "전사"]},
-  {"name": "럭스", "name_kr": "럭스", "cost": 4, "traits": ["데마시아", "마법사"]},
-  {"name": "브라움", "name_kr": "브라움", "cost": 4, "traits": ["기원자", "파수꾼"]},
-  {"name": "세라핀", "name_kr": "세라핀", "cost": 4, "traits": ["필트오버", "마법사"]},
-  {"name": "코부코와 유미", "name_kr": "코부코와 유미", "cost": 4, "traits": ["요들", "난동꾼"]},
-  {"name": "트린다미어", "name_kr": "트린다미어", "cost": 4, "traits": ["기동타격대", "전사"]},
-  {"name": "리산드라", "name_kr": "리산드라", "cost": 4, "traits": ["기원자", "마법사"]},
-  {"name": "미스 포츈", "name_kr": "미스 포츈", "cost": 4, "traits": ["빌지워터", "저격수"]},
-  {"name": "스카너", "name_kr": "스카너", "cost": 4, "traits": ["이쉬탈", "파수꾼"]},
-  {"name": "워윅", "name_kr": "워윅", "cost": 4, "traits": ["자운", "기동타격대"]},
-  {"name": "베인", "name_kr": "베인", "cost": 4, "traits": ["데마시아", "저격수"]},
-  {"name": "다이애나", "name_kr": "다이애나", "cost": 4, "traits": ["전기", "학살자"]},
-  {"name": "유나라", "name_kr": "유나라", "cost": 5, "traits": ["아이오니아", "마법사"]},
-  {"name": "타릭", "name_kr": "타릭", "cost": 5, "traits": ["기원자", "파수꾼"]},
-  {"name": "카이사", "name_kr": "카이사", "cost": 5, "traits": ["공허", "저격수"]},
-  {"name": "세트", "name_kr": "세트", "cost": 5, "traits": ["아이오니아", "난동꾼", "투사"]},
-  {"name": "쉬바나", "name_kr": "쉬바나", "cost": 5, "traits": ["전기", "전사"]},
-  {"name": "루시안과 세나", "name_kr": "루시안과 세나", "cost": 5, "traits": ["기동타격대", "저격수"]},
-  {"name": "킨드레드", "name_kr": "킨드레드", "cost": 5, "traits": ["그림자 군도", "학살자"]},
-  {"name": "갈리오", "name_kr": "갈리오", "cost": 5, "traits": ["데마시아", "파수꾼"]},
-  {"name": "칼리스타", "name_kr": "칼리스타", "cost": 5, "traits": ["그림자 군도", "기동타격대"]},
-  {"name": "쓰레쉬", "name_kr": "쓰레쉬", "cost": 5, "traits": ["그림자 군도", "파수꾼"]},
-  {"name": "오른", "name_kr": "오른", "cost": 5, "traits": ["기원자", "전사"]},
-  {"name": "피들스틱", "name_kr": "피들스틱", "cost": 5, "traits": ["그림자 군도", "마법사"]},
-  {"name": "요네", "name_kr": "요네", "cost": 5, "traits": ["아이오니아", "기동타격대"]},
-  {"name": "아트록스", "name_kr": "아트록스", "cost": 5, "traits": ["전기", "학살자"]},
-  {"name": "협곡의 전령", "name_kr": "협곡의 전령", "cost": 5, "traits": ["공허", "난동꾼"]},
-  {"name": "베이가", "name_kr": "베이가", "cost": 4, "traits": ["요들", "마법사"]},
-  {"name": "직스", "name_kr": "직스", "cost": 4, "traits": ["요들", "자운", "포수"]},
-  {"name": "피즈", "name_kr": "피즈", "cost": 4, "traits": ["요들", "빌지워터", "기동타격대"]},
-  {"name": "비에고", "name_kr": "비에고", "cost": 5, "traits": ["그림자 군도", "학살자"]},
-  {"name": "질리언", "name_kr": "질리언", "cost": 5, "traits": ["기원자", "마법사"]},
-  {"name": "볼리베어", "name_kr": "볼리베어", "cost": 5, "traits": ["기원자", "난동꾼"]},
-  {"name": "탐 켄치", "name_kr": "탐 켄치", "cost": 5, "traits": ["빌지워터", "난동꾼"]},
-  {"name": "멜", "name_kr": "멜", "cost": 5, "traits": ["녹서스", "마법사"]},
-  {"name": "아지르", "name_kr": "아지르", "cost": 5, "traits": ["슈리마", "전사"]},
-  {"name": "자헨", "name_kr": "자헨", "cost": 5, "traits": ["데마시아", "아이오니아", "전사"]},
-  {"name": "라이즈", "name_kr": "라이즈", "cost": 5, "traits": ["마법사"]},
-  {"name": "T-헥스", "name_kr": "T-헥스", "cost": 5, "traits": ["필트오버", "파수꾼"]},
-  {"name": "애니", "name_kr": "애니", "cost": 5, "traits": ["슈리마", "마법사"]},
-  {"name": "제라스", "name_kr": "제라스", "cost": 5, "traits": ["슈리마", "포수"]},
-  {"name": "사일러스", "name_kr": "사일러스", "cost": 5, "traits": ["비전", "난동꾼"]},
-  {"name": "브록", "name_kr": "브록", "cost": 5, "traits": ["이쉬탈", "난동꾼"]},
-  {"name": "아우렐리온 솔", "name_kr": "아우렐리온 솔", "cost": 5, "traits": ["전기", "마법사"]},
-  {"name": "애니비아", "name_kr": "애니비아", "cost": 4, "traits": ["기원자", "마법사"]}
+  {
+    "name": "코그모",
+    "name_kr": "코그모",
+    "cost": 1,
+    "traits": [
+      "공허",
+      "포수"
+    ],
+    "apiName": "KogMaw"
+  },
+  {
+    "name": "럼블",
+    "name_kr": "럼블",
+    "cost": 1,
+    "traits": [
+      "요들",
+      "포수"
+    ],
+    "apiName": "Rumble"
+  },
+  {
+    "name": "뽀삐",
+    "name_kr": "뽀삐",
+    "cost": 1,
+    "traits": [
+      "요들",
+      "데마시아",
+      "파수꾼"
+    ],
+    "apiName": "Poppy"
+  },
+  {
+    "name": "소나",
+    "name_kr": "소나",
+    "cost": 1,
+    "traits": [
+      "데마시아",
+      "마법사"
+    ],
+    "apiName": "Sona"
+  },
+  {
+    "name": "블리츠크랭크",
+    "name_kr": "블리츠크랭크",
+    "cost": 1,
+    "traits": [
+      "자운",
+      "파수꾼"
+    ],
+    "apiName": "Blitzcrank"
+  },
+  {
+    "name": "자르반 4세",
+    "name_kr": "자르반 4세",
+    "cost": 1,
+    "traits": [
+      "데마시아",
+      "전사"
+    ],
+    "apiName": "JarvanIV"
+  },
+  {
+    "name": "케이틀린",
+    "name_kr": "케이틀린",
+    "cost": 1,
+    "traits": [
+      "필트오버",
+      "저격수"
+    ],
+    "apiName": "Caitlyn"
+  },
+  {
+    "name": "일라오이",
+    "name_kr": "일라오이",
+    "cost": 1,
+    "traits": [
+      "빌지워터",
+      "난동꾼"
+    ],
+    "apiName": "Illaoi"
+  },
+  {
+    "name": "쉔",
+    "name_kr": "쉔",
+    "cost": 1,
+    "traits": [
+      "아이오니아",
+      "파수꾼"
+    ],
+    "apiName": "Shen"
+  },
+  {
+    "name": "니코",
+    "name_kr": "니코",
+    "cost": 1,
+    "traits": [
+      "이쉬탈",
+      "마법사"
+    ],
+    "apiName": "Neeko"
+  },
+  {
+    "name": "바이",
+    "name_kr": "바이",
+    "cost": 1,
+    "traits": [
+      "필트오버",
+      "자운",
+      "투사"
+    ],
+    "apiName": "Vi"
+  },
+  {
+    "name": "트위스티드 페이트",
+    "name_kr": "트위스티드 페이트",
+    "cost": 2,
+    "traits": [
+      "빌지워터",
+      "기동타격대"
+    ],
+    "apiName": "TwistedFate"
+  },
+  {
+    "name": "브라이어",
+    "name_kr": "브라이어",
+    "cost": 2,
+    "traits": [
+      "녹서스",
+      "학살자"
+    ],
+    "apiName": "Briar"
+  },
+  {
+    "name": "렉사이",
+    "name_kr": "렉사이",
+    "cost": 2,
+    "traits": [
+      "공허",
+      "난동꾼"
+    ],
+    "apiName": "RekSai"
+  },
+  {
+    "name": "애쉬",
+    "name_kr": "애쉬",
+    "cost": 2,
+    "traits": [
+      "기동타격대",
+      "저격수"
+    ],
+    "apiName": "Ashe"
+  },
+  {
+    "name": "에코",
+    "name_kr": "에코",
+    "cost": 2,
+    "traits": [
+      "자운",
+      "기동타격대"
+    ],
+    "apiName": "Ekko"
+  },
+  {
+    "name": "티모",
+    "name_kr": "티모",
+    "cost": 2,
+    "traits": [
+      "요들",
+      "마법사"
+    ],
+    "apiName": "Teemo"
+  },
+  {
+    "name": "사이온",
+    "name_kr": "사이온",
+    "cost": 2,
+    "traits": [
+      "녹서스",
+      "난동꾼"
+    ],
+    "apiName": "Sion"
+  },
+  {
+    "name": "다리우스",
+    "name_kr": "다리우스",
+    "cost": 2,
+    "traits": [
+      "녹서스",
+      "전사"
+    ],
+    "apiName": "Darius"
+  },
+  {
+    "name": "신 짜오",
+    "name_kr": "신 짜오",
+    "cost": 2,
+    "traits": [
+      "데마시아",
+      "전사"
+    ],
+    "apiName": "XinZhao"
+  },
+  {
+    "name": "아리",
+    "name_kr": "아리",
+    "cost": 2,
+    "traits": [
+      "아이오니아",
+      "마법사"
+    ],
+    "apiName": "Ahri"
+  },
+  {
+    "name": "바드",
+    "name_kr": "바드",
+    "cost": 2,
+    "traits": [
+      "이쉬탈",
+      "난동꾼"
+    ],
+    "apiName": "Bard"
+  },
+  {
+    "name": "룰루",
+    "name_kr": "룰루",
+    "cost": 2,
+    "traits": [
+      "요들",
+      "마법사"
+    ],
+    "apiName": "Lulu"
+  },
+  {
+    "name": "트리스타나",
+    "name_kr": "트리스타나",
+    "cost": 2,
+    "traits": [
+      "요들",
+      "저격수"
+    ],
+    "apiName": "Tristana"
+  },
+  {
+    "name": "그레이브즈",
+    "name_kr": "그레이브즈",
+    "cost": 2,
+    "traits": [
+      "빌지워터",
+      "투사"
+    ],
+    "apiName": "Graves"
+  },
+  {
+    "name": "야스오",
+    "name_kr": "야스오",
+    "cost": 2,
+    "traits": [
+      "아이오니아",
+      "기동타격대"
+    ],
+    "apiName": "Yasuo"
+  },
+  {
+    "name": "티버",
+    "name_kr": "티버",
+    "cost": 2,
+    "traits": [
+      "슈리마",
+      "파수꾼"
+    ],
+    "apiName": "Tibbers"
+  },
+  {
+    "name": "초가스",
+    "name_kr": "초가스",
+    "cost": 3,
+    "traits": [
+      "공허",
+      "전기"
+    ],
+    "apiName": "ChoGath"
+  },
+  {
+    "name": "오리아나",
+    "name_kr": "오리아나",
+    "cost": 3,
+    "traits": [
+      "필트오버",
+      "마법사"
+    ],
+    "apiName": "Orianna"
+  },
+  {
+    "name": "갱플랭크",
+    "name_kr": "갱플랭크",
+    "cost": 3,
+    "traits": [
+      "빌지워터",
+      "토벌자"
+    ],
+    "apiName": "Gangplank"
+  },
+  {
+    "name": "노틸러스",
+    "name_kr": "노틸러스",
+    "cost": 3,
+    "traits": [
+      "빌지워터",
+      "파수꾼"
+    ],
+    "apiName": "Nautilus"
+  },
+  {
+    "name": "드레이븐",
+    "name_kr": "드레이븐",
+    "cost": 3,
+    "traits": [
+      "녹서스",
+      "학살자"
+    ],
+    "apiName": "Draven"
+  },
+  {
+    "name": "문도 박사",
+    "name_kr": "문도 박사",
+    "cost": 3,
+    "traits": [
+      "자운",
+      "난동꾼"
+    ],
+    "apiName": "DrMundo"
+  },
+  {
+    "name": "레넥톤",
+    "name_kr": "레넥톤",
+    "cost": 3,
+    "traits": [
+      "슈리마",
+      "녹서스",
+      "전사"
+    ],
+    "apiName": "Renekton"
+  },
+  {
+    "name": "세주아니",
+    "name_kr": "세주아니",
+    "cost": 3,
+    "traits": [
+      "기원자",
+      "파수꾼"
+    ],
+    "apiName": "Sejuani"
+  },
+  {
+    "name": "로리스",
+    "name_kr": "로리스",
+    "cost": 3,
+    "traits": [
+      "필트오버",
+      "파수꾼"
+    ],
+    "apiName": "Loris"
+  },
+  {
+    "name": "케넨",
+    "name_kr": "케넨",
+    "cost": 3,
+    "traits": [
+      "요들",
+      "난동꾼"
+    ],
+    "apiName": "Kennen"
+  },
+  {
+    "name": "스웨인",
+    "name_kr": "스웨인",
+    "cost": 3,
+    "traits": [
+      "녹서스",
+      "전기",
+      "마법사"
+    ],
+    "apiName": "Swain"
+  },
+  {
+    "name": "징크스",
+    "name_kr": "징크스",
+    "cost": 3,
+    "traits": [
+      "자운",
+      "저격수"
+    ],
+    "apiName": "Jinx"
+  },
+  {
+    "name": "니달리",
+    "name_kr": "니달리",
+    "cost": 3,
+    "traits": [
+      "이쉬탈",
+      "기동타격대"
+    ],
+    "apiName": "Nidalee"
+  },
+  {
+    "name": "아펠리오스",
+    "name_kr": "아펠리오스",
+    "cost": 3,
+    "traits": [
+      "난동꾼",
+      "저격수"
+    ],
+    "apiName": "Aphelios"
+  },
+  {
+    "name": "신지드",
+    "name_kr": "신지드",
+    "cost": 3,
+    "traits": [
+      "자운",
+      "공허"
+    ],
+    "apiName": "Singed"
+  },
+  {
+    "name": "밀리오",
+    "name_kr": "밀리오",
+    "cost": 3,
+    "traits": [
+      "이쉬탈",
+      "마법사"
+    ],
+    "apiName": "Milio"
+  },
+  {
+    "name": "말자하",
+    "name_kr": "말자하",
+    "cost": 3,
+    "traits": [
+      "공허",
+      "마법사"
+    ],
+    "apiName": "Malzahar"
+  },
+  {
+    "name": "요릭",
+    "name_kr": "요릭",
+    "cost": 4,
+    "traits": [
+      "그림자 군도",
+      "파수꾼"
+    ],
+    "apiName": "Yorick"
+  },
+  {
+    "name": "그웬",
+    "name_kr": "그웬",
+    "cost": 4,
+    "traits": [
+      "그림자 군도",
+      "기동타격대"
+    ],
+    "apiName": "Gwen"
+  },
+  {
+    "name": "벨베스",
+    "name_kr": "벨베스",
+    "cost": 4,
+    "traits": [
+      "공허",
+      "전기",
+      "학살자"
+    ],
+    "apiName": "BelVeth"
+  },
+  {
+    "name": "오공",
+    "name_kr": "오공",
+    "cost": 4,
+    "traits": [
+      "아이오니아",
+      "난동꾼"
+    ],
+    "apiName": "Wukong"
+  },
+  {
+    "name": "암베사",
+    "name_kr": "암베사",
+    "cost": 4,
+    "traits": [
+      "녹서스",
+      "학살자"
+    ],
+    "apiName": "Ambessa"
+  },
+  {
+    "name": "가렌",
+    "name_kr": "가렌",
+    "cost": 4,
+    "traits": [
+      "데마시아",
+      "전사"
+    ],
+    "apiName": "Garen"
+  },
+  {
+    "name": "럭스",
+    "name_kr": "럭스",
+    "cost": 4,
+    "traits": [
+      "데마시아",
+      "마법사"
+    ],
+    "apiName": "Lux"
+  },
+  {
+    "name": "브라움",
+    "name_kr": "브라움",
+    "cost": 4,
+    "traits": [
+      "기원자",
+      "파수꾼"
+    ],
+    "apiName": "Braum"
+  },
+  {
+    "name": "세라핀",
+    "name_kr": "세라핀",
+    "cost": 4,
+    "traits": [
+      "필트오버",
+      "마법사"
+    ],
+    "apiName": "Seraphine"
+  },
+  {
+    "name": "코부코와 유미",
+    "name_kr": "코부코와 유미",
+    "cost": 4,
+    "traits": [
+      "요들",
+      "난동꾼"
+    ],
+    "apiName": "Kobuko"
+  },
+  {
+    "name": "트린다미어",
+    "name_kr": "트린다미어",
+    "cost": 4,
+    "traits": [
+      "기동타격대",
+      "전사"
+    ],
+    "apiName": "Tryndamere"
+  },
+  {
+    "name": "리산드라",
+    "name_kr": "리산드라",
+    "cost": 4,
+    "traits": [
+      "기원자",
+      "마법사"
+    ],
+    "apiName": "Lissandra"
+  },
+  {
+    "name": "미스 포츈",
+    "name_kr": "미스 포츈",
+    "cost": 4,
+    "traits": [
+      "빌지워터",
+      "저격수"
+    ],
+    "apiName": "MissFortune"
+  },
+  {
+    "name": "스카너",
+    "name_kr": "스카너",
+    "cost": 4,
+    "traits": [
+      "이쉬탈",
+      "파수꾼"
+    ],
+    "apiName": "Skarner"
+  },
+  {
+    "name": "워윅",
+    "name_kr": "워윅",
+    "cost": 4,
+    "traits": [
+      "자운",
+      "기동타격대"
+    ],
+    "apiName": "Warwick"
+  },
+  {
+    "name": "베인",
+    "name_kr": "베인",
+    "cost": 4,
+    "traits": [
+      "데마시아",
+      "저격수"
+    ],
+    "apiName": "Vayne"
+  },
+  {
+    "name": "다이애나",
+    "name_kr": "다이애나",
+    "cost": 4,
+    "traits": [
+      "전기",
+      "학살자"
+    ],
+    "apiName": "Diana"
+  },
+  {
+    "name": "유나라",
+    "name_kr": "유나라",
+    "cost": 5,
+    "traits": [
+      "아이오니아",
+      "마법사"
+    ],
+    "apiName": "Yunara"
+  },
+  {
+    "name": "타릭",
+    "name_kr": "타릭",
+    "cost": 5,
+    "traits": [
+      "기원자",
+      "파수꾼"
+    ],
+    "apiName": "Taric"
+  },
+  {
+    "name": "카이사",
+    "name_kr": "카이사",
+    "cost": 5,
+    "traits": [
+      "공허",
+      "저격수"
+    ],
+    "apiName": "Kaisa"
+  },
+  {
+    "name": "세트",
+    "name_kr": "세트",
+    "cost": 5,
+    "traits": [
+      "아이오니아",
+      "난동꾼",
+      "투사"
+    ],
+    "apiName": "Sett"
+  },
+  {
+    "name": "쉬바나",
+    "name_kr": "쉬바나",
+    "cost": 5,
+    "traits": [
+      "전기",
+      "전사"
+    ],
+    "apiName": "Shyvana"
+  },
+  {
+    "name": "루시안과 세나",
+    "name_kr": "루시안과 세나",
+    "cost": 5,
+    "traits": [
+      "기동타격대",
+      "저격수"
+    ],
+    "apiName": "Lucian"
+  },
+  {
+    "name": "킨드레드",
+    "name_kr": "킨드레드",
+    "cost": 5,
+    "traits": [
+      "그림자 군도",
+      "학살자"
+    ],
+    "apiName": "Kindred"
+  },
+  {
+    "name": "갈리오",
+    "name_kr": "갈리오",
+    "cost": 5,
+    "traits": [
+      "데마시아",
+      "파수꾼"
+    ],
+    "apiName": "Galio"
+  },
+  {
+    "name": "칼리스타",
+    "name_kr": "칼리스타",
+    "cost": 5,
+    "traits": [
+      "그림자 군도",
+      "기동타격대"
+    ],
+    "apiName": "Kalista"
+  },
+  {
+    "name": "쓰레쉬",
+    "name_kr": "쓰레쉬",
+    "cost": 5,
+    "traits": [
+      "그림자 군도",
+      "파수꾼"
+    ],
+    "apiName": "Thresh"
+  },
+  {
+    "name": "오른",
+    "name_kr": "오른",
+    "cost": 5,
+    "traits": [
+      "기원자",
+      "전사"
+    ],
+    "apiName": "Ornn"
+  },
+  {
+    "name": "피들스틱",
+    "name_kr": "피들스틱",
+    "cost": 5,
+    "traits": [
+      "그림자 군도",
+      "마법사"
+    ],
+    "apiName": "Fiddlesticks"
+  },
+  {
+    "name": "요네",
+    "name_kr": "요네",
+    "cost": 5,
+    "traits": [
+      "아이오니아",
+      "기동타격대"
+    ],
+    "apiName": "Yone"
+  },
+  {
+    "name": "아트록스",
+    "name_kr": "아트록스",
+    "cost": 5,
+    "traits": [
+      "전기",
+      "학살자"
+    ],
+    "apiName": "Aatrox"
+  },
+  {
+    "name": "협곡의 전령",
+    "name_kr": "협곡의 전령",
+    "cost": 5,
+    "traits": [
+      "공허",
+      "난동꾼"
+    ],
+    "apiName": "RiftHerald"
+  },
+  {
+    "name": "베이가",
+    "name_kr": "베이가",
+    "cost": 4,
+    "traits": [
+      "요들",
+      "마법사"
+    ],
+    "apiName": "Veigar"
+  },
+  {
+    "name": "직스",
+    "name_kr": "직스",
+    "cost": 4,
+    "traits": [
+      "요들",
+      "자운",
+      "포수"
+    ],
+    "apiName": "Ziggs"
+  },
+  {
+    "name": "피즈",
+    "name_kr": "피즈",
+    "cost": 4,
+    "traits": [
+      "요들",
+      "빌지워터",
+      "기동타격대"
+    ],
+    "apiName": "Fizz"
+  },
+  {
+    "name": "비에고",
+    "name_kr": "비에고",
+    "cost": 5,
+    "traits": [
+      "그림자 군도",
+      "학살자"
+    ],
+    "apiName": "Viego"
+  },
+  {
+    "name": "질리언",
+    "name_kr": "질리언",
+    "cost": 5,
+    "traits": [
+      "기원자",
+      "마법사"
+    ],
+    "apiName": "Zilean"
+  },
+  {
+    "name": "볼리베어",
+    "name_kr": "볼리베어",
+    "cost": 5,
+    "traits": [
+      "기원자",
+      "난동꾼"
+    ],
+    "apiName": "Volibear"
+  },
+  {
+    "name": "탐 켄치",
+    "name_kr": "탐 켄치",
+    "cost": 5,
+    "traits": [
+      "빌지워터",
+      "난동꾼"
+    ],
+    "apiName": "TahmKench"
+  },
+  {
+    "name": "멜",
+    "name_kr": "멜",
+    "cost": 5,
+    "traits": [
+      "녹서스",
+      "마법사"
+    ],
+    "apiName": "Mel"
+  },
+  {
+    "name": "아지르",
+    "name_kr": "아지르",
+    "cost": 5,
+    "traits": [
+      "슈리마",
+      "전사"
+    ],
+    "apiName": "Azir"
+  },
+  {
+    "name": "자헨",
+    "name_kr": "자헨",
+    "cost": 5,
+    "traits": [
+      "데마시아",
+      "아이오니아",
+      "전사"
+    ],
+    "apiName": "Zaahen"
+  },
+  {
+    "name": "라이즈",
+    "name_kr": "라이즈",
+    "cost": 5,
+    "traits": [
+      "마법사"
+    ],
+    "apiName": "Ryze"
+  },
+  {
+    "name": "T-헥스",
+    "name_kr": "T-헥스",
+    "cost": 5,
+    "traits": [
+      "필트오버",
+      "파수꾼"
+    ],
+    "apiName": "THex"
+  },
+  {
+    "name": "애니",
+    "name_kr": "애니",
+    "cost": 5,
+    "traits": [
+      "슈리마",
+      "마법사"
+    ],
+    "apiName": "Annie"
+  },
+  {
+    "name": "제라스",
+    "name_kr": "제라스",
+    "cost": 5,
+    "traits": [
+      "슈리마",
+      "포수"
+    ],
+    "apiName": "Xerath"
+  },
+  {
+    "name": "사일러스",
+    "name_kr": "사일러스",
+    "cost": 5,
+    "traits": [
+      "비전",
+      "난동꾼"
+    ],
+    "apiName": "Sylas"
+  },
+  {
+    "name": "브록",
+    "name_kr": "브록",
+    "cost": 5,
+    "traits": [
+      "이쉬탈",
+      "난동꾼"
+    ],
+    "apiName": "Brock"
+  },
+  {
+    "name": "아우렐리온 솔",
+    "name_kr": "아우렐리온 솔",
+    "cost": 5,
+    "traits": [
+      "전기",
+      "마법사"
+    ],
+    "apiName": "AurelionSol"
+  },
+  {
+    "name": "애니비아",
+    "name_kr": "애니비아",
+    "cost": 4,
+    "traits": [
+      "기원자",
+      "마법사"
+    ],
+    "apiName": "Anivia"
+  }
 ]

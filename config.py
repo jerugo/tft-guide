@@ -1,5 +1,6 @@
 """TFT Guide 설정"""
 import os
+import pathlib
 
 # LLM API 설정
 LLM_API_URL = os.environ.get("LLM_API_URL", "http://localhost:11434/v1")
@@ -8,6 +9,7 @@ LLM_TIMEOUT = int(os.environ.get("LLM_TIMEOUT", "30"))
 
 # 화면 캡처 설정
 CAPTURE_INTERVAL = float(os.environ.get("CAPTURE_INTERVAL", "2.0"))
+DETECTION_THRESHOLD = float(os.environ.get("DETECTION_THRESHOLD", "0.7"))
 TFT_WINDOW_TITLES = ["TFT", "Teamfight Tactics", "League of Legends"]
 
 # 서버 설정
@@ -15,11 +17,11 @@ HOST = "127.0.0.1"
 PORT = int(os.environ.get("PORT", "5000"))
 
 # 데이터 경로
-import pathlib
 DATA_DIR = pathlib.Path(__file__).parent / "data"
 CHAMPIONS_JSON = DATA_DIR / "champions.json"
 META_JSON = DATA_DIR / "meta.json"
 TEMPLATES_DIR = DATA_DIR / "templates"
+ICONS_DIR = DATA_DIR / "icons"
 
 # TFT 챔피언 풀 (코스트별 총 복사본 수)
 CHAMPION_POOL = {1: 29, 2: 22, 3: 18, 4: 12, 5: 10}
