@@ -71,6 +71,42 @@
         </div>
       </div>
 
+      <!-- 상점 추천 -->
+      <div class="card">
+        <div class="card-header">
+          <h2>🛒 상점</h2>
+          <button class="btn-sm" onclick="clearShop()">초기화</button>
+        </div>
+
+        <!-- 5개 상점 슬롯 -->
+        <div class="shop-slots" id="shopSlots">
+          <div class="shop-slot empty" data-slot="0" onclick="openShopPicker(0)"><span class="shop-slot-label">슬롯 1</span></div>
+          <div class="shop-slot empty" data-slot="1" onclick="openShopPicker(1)"><span class="shop-slot-label">슬롯 2</span></div>
+          <div class="shop-slot empty" data-slot="2" onclick="openShopPicker(2)"><span class="shop-slot-label">슬롯 3</span></div>
+          <div class="shop-slot empty" data-slot="3" onclick="openShopPicker(3)"><span class="shop-slot-label">슬롯 4</span></div>
+          <div class="shop-slot empty" data-slot="4" onclick="openShopPicker(4)"><span class="shop-slot-label">슬롯 5</span></div>
+        </div>
+
+        <!-- 상점 챔피언 검색/선택 모달 -->
+        <div class="shop-picker-overlay" id="shopPickerOverlay" style="display:none" onclick="closeShopPicker()">
+          <div class="shop-picker" onclick="event.stopPropagation()">
+            <input type="text" id="shopSearchInput" placeholder="챔피언 검색..." oninput="filterShopChamps(this.value)">
+            <div class="shop-picker-grid" id="shopPickerGrid"></div>
+          </div>
+        </div>
+
+        <!-- 상점 추천 결과 -->
+        <div id="shopAdvice" class="shop-advice-container">
+          <p class="placeholder">상점에 챔피언을 배치하면 구매 추천을 표시합니다</p>
+        </div>
+
+        <!-- 리롤/레벨 추천 -->
+        <div id="rerollAdvice" style="display:none"></div>
+
+        <!-- 레벨별 확률 표시 -->
+        <div class="level-odds-bar" id="levelOddsBar"></div>
+      </div>
+
       <!-- 추천 덱 -->
       <div class="card">
         <h2>📊 추천 덱</h2>
@@ -450,7 +486,209 @@ function syncLevelGold() {
   });
 }
 
+// --- 상점 기능 ---
+let shopSlots = [null, null, null, null, null]; // 5 shop slots
+let activeShopSlot = -1;
+
+const SHOP_ODDS_TABLE = {
+  2:  [100, 0, 0, 0, 0],
+  3:  [75, 25, 0, 0, 0],
+  4:  [55, 30, 15, 0, 0],
+  5:  [45, 33, 20, 2, 0],
+  6:  [30, 40, 25, 5, 0],
+  7:  [19, 30, 35, 15, 1],
+  8:  [18, 25, 32, 22, 3],
+  9:  [15, 20, 25, 30, 10],
+  10: [5, 10, 20, 40, 25],
+};
+
+function openShopPicker(slot) {
+  activeShopSlot = slot;
+  const overlay = document.getElementById('shopPickerOverlay');
+  const grid = document.getElementById('shopPickerGrid');
+  const input = document.getElementById('shopSearchInput');
+
+  // Build champion grid
+  grid.innerHTML = champData.map(c => {
+    const api = c.apiName || '';
+    return `<div class="shop-pick-item cost-${c.cost}" data-name="${c.name}" data-kr="${c.name_kr}" onclick="pickShopChamp('${c.name}')">
+      ${api ? `<img src="/static/icons/TFT16_${api}.png" alt="${c.name_kr}" loading="lazy" onerror="this.style.display='none'">` : ''}
+      <span>${c.name_kr}</span>
+    </div>`;
+  }).join('');
+
+  overlay.style.display = 'flex';
+  input.value = '';
+  input.focus();
+}
+
+function closeShopPicker() {
+  document.getElementById('shopPickerOverlay').style.display = 'none';
+  activeShopSlot = -1;
+}
+
+function filterShopChamps(query) {
+  const items = document.querySelectorAll('.shop-pick-item');
+  const q = query.toLowerCase();
+  items.forEach(item => {
+    const kr = item.dataset.kr.toLowerCase();
+    const en = item.dataset.name.toLowerCase();
+    item.style.display = (kr.includes(q) || en.includes(q)) ? '' : 'none';
+  });
+}
+
+function pickShopChamp(name) {
+  if (activeShopSlot < 0 || activeShopSlot > 4) return;
+  shopSlots[activeShopSlot] = name;
+  closeShopPicker();
+  renderShopSlots();
+  requestShopAdvice();
+}
+
+function removeShopSlot(slot) {
+  shopSlots[slot] = null;
+  renderShopSlots();
+  requestShopAdvice();
+}
+
+function clearShop() {
+  shopSlots = [null, null, null, null, null];
+  renderShopSlots();
+  document.getElementById('shopAdvice').innerHTML = '<p class="placeholder">상점에 챔피언을 배치하면 구매 추천을 표시합니다</p>';
+  document.getElementById('rerollAdvice').style.display = 'none';
+}
+
+function renderShopSlots() {
+  const container = document.getElementById('shopSlots');
+  container.innerHTML = shopSlots.map((name, i) => {
+    if (!name) {
+      return `<div class="shop-slot empty" data-slot="${i}" onclick="openShopPicker(${i})"><span class="shop-slot-label">슬롯 ${i+1}</span></div>`;
+    }
+    const c = champData.find(ch => ch.name === name);
+    if (!c) return '';
+    const api = c.apiName || '';
+    return `<div class="shop-slot filled cost-${c.cost}" data-slot="${i}">
+      ${api ? `<img src="/static/icons/TFT16_${api}.png" alt="${c.name_kr}">` : ''}
+      <span class="shop-slot-name">${c.name_kr}</span>
+      <button class="shop-slot-remove" onclick="event.stopPropagation(); removeShopSlot(${i})">✕</button>
+    </div>`;
+  }).join('');
+}
+
+async function requestShopAdvice() {
+  const filled = shopSlots.filter(Boolean);
+  if (filled.length === 0) {
+    document.getElementById('shopAdvice').innerHTML = '<p class="placeholder">상점에 챔피언을 배치하면 구매 추천을 표시합니다</p>';
+    document.getElementById('rerollAdvice').style.display = 'none';
+    return;
+  }
+
+  try {
+    const resp = await fetch('/api/shop_advice', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        shop_champions: filled,
+        my_champions: [...selectedChamps],
+        level: parseInt(document.getElementById('levelSelect').value),
+        gold: parseInt(document.getElementById('goldInput').value),
+      })
+    });
+    const data = await resp.json();
+    renderShopAdvice(data);
+  } catch(e) {
+    document.getElementById('shopAdvice').innerHTML = `<p class="error">오류: ${e.message}</p>`;
+  }
+}
+
+function renderShopAdvice(data) {
+  const el = document.getElementById('shopAdvice');
+  const advice = data.shop_advice || [];
+
+  if (!advice.length) {
+    el.innerHTML = '<p class="placeholder">추천 결과 없음</p>';
+    return;
+  }
+
+  const actionColors = {
+    buy: 'shop-buy',
+    consider: 'shop-consider',
+    pass: 'shop-pass',
+    upgrade: 'shop-upgrade',
+  };
+
+  el.innerHTML = advice.map(a => {
+    const c = champData.find(ch => ch.name === a.name);
+    const api = c ? c.apiName || '' : '';
+    const cls = actionColors[a.action] || 'shop-pass';
+    return `<div class="shop-advice-item ${cls}">
+      <div class="shop-advice-champ">
+        ${api ? `<img src="/static/icons/TFT16_${api}.png" alt="${a.name_kr}">` : ''}
+        <span class="shop-advice-name">${a.name_kr}</span>
+        <span class="shop-advice-cost cost-${a.cost}-text">${a.cost}코</span>
+      </div>
+      <div class="shop-advice-action">
+        <span class="shop-advice-emoji">${a.emoji}</span>
+        <span class="shop-advice-reason">${a.reason}</span>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Reroll advice
+  const reroll = data.reroll_advice;
+  const levelAdv = data.level_advice;
+  const rerollEl = document.getElementById('rerollAdvice');
+
+  if (reroll || levelAdv) {
+    rerollEl.style.display = 'block';
+    let html = '';
+    if (reroll) {
+      const rerollCls = reroll.should_reroll ? 'reroll-yes' : 'reroll-no';
+      html += `<div class="reroll-card ${rerollCls}">
+        <span class="reroll-label">🎰 리롤 추천: ${reroll.emoji}</span>
+        <span class="reroll-reason">${reroll.reason}</span>
+        <div class="reroll-detail">${reroll.detail}</div>
+      </div>`;
+    }
+    if (levelAdv) {
+      const lvlCls = levelAdv.should_level ? 'reroll-yes' : 'reroll-no';
+      html += `<div class="reroll-card ${lvlCls}">
+        <span class="reroll-label">⬆️ 레벨업:</span>
+        <span class="reroll-reason">${levelAdv.reason}</span>
+      </div>`;
+    }
+    rerollEl.innerHTML = html;
+  } else {
+    rerollEl.style.display = 'none';
+  }
+}
+
+function updateLevelOdds() {
+  const level = parseInt(document.getElementById('levelSelect').value);
+  const odds = SHOP_ODDS_TABLE[level] || [0,0,0,0,0];
+  const el = document.getElementById('levelOddsBar');
+  const costLabels = ['1코', '2코', '3코', '4코', '5코'];
+  const colors = [costColors[1], costColors[2], costColors[3], costColors[4], costColors[5]];
+
+  el.innerHTML = `<div class="odds-label">Lv${level} 확률</div><div class="odds-bars">` +
+    odds.map((pct, i) => {
+      if (pct === 0) return '';
+      return `<div class="odds-segment" style="width:${Math.max(pct, 8)}%;background:${colors[i]}">
+        <span>${costLabels[i]} ${pct}%</span>
+      </div>`;
+    }).filter(Boolean).join('') + '</div>';
+}
+
+// Update odds on level change
+document.getElementById('levelSelect').addEventListener('change', () => {
+  updateLevelOdds();
+  if (shopSlots.some(Boolean)) requestShopAdvice();
+});
+document.getElementById('goldInput').addEventListener('change', () => {
+  if (shopSlots.some(Boolean)) requestShopAdvice();
+});
+
 // 초기화
+updateLevelOdds();
 pollStatus();
 checkLLMStatus();
 pollingTimer = setInterval(pollStatus, 2000);

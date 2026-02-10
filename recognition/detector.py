@@ -192,6 +192,19 @@ class ChampionDetector:
             return []
         return self.detect_champions(image, {region: REGIONS[region]})
 
+    def detect_shop(self, image: np.ndarray) -> list[dict]:
+        """
+        상점 영역만 인식하여 5개 슬롯 순서대로 반환.
+        Returns: [{name, name_kr, cost, confidence, slot}] (최대 5개, 좌→우 정렬)
+        """
+        detections = self.detect_from_region(image, "shop")
+        # Sort by x position (left to right) for slot ordering
+        detections.sort(key=lambda d: d["position"][0])
+        # Assign slot numbers
+        for i, det in enumerate(detections[:5]):
+            det["slot"] = i
+        return detections[:5]
+
     @property
     def template_count(self) -> int:
         return len(self._templates)

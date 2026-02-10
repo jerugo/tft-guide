@@ -29,6 +29,7 @@ def create_app(capture=None, detector=None, llm_url=None):
         "gold": 0,
         "capturing": False,
         "detected_champions": [],  # 자동 인식된 챔피언
+        "shop_champions": [],      # 상점 챔피언
         "last_update": 0,
     }
 
@@ -193,6 +194,30 @@ def create_app(capture=None, detector=None, llm_url=None):
         if "llm_url" in data:
             llm.api_url = data["llm_url"].rstrip("/")
         return jsonify({"ok": True})
+
+    @app.route("/api/shop_advice", methods=["POST"])
+    def api_shop_advice():
+        """상점 추천 분석"""
+        data = request.json or {}
+        shop_champs = data.get("shop_champions", [])
+
+        with _state_lock:
+            my_champs = data.get("my_champions", list(state["my_champions"]))
+            level = data.get("level", state["level"])
+            gold = data.get("gold", state["gold"])
+            opponents = list(state["opponents"])
+            state["shop_champions"] = shop_champs
+
+        # Get recommendations first
+        all_champs = list(set(my_champs))
+        recs = recommender.recommend(all_champs, opponents, level) if all_champs else []
+
+        # Get shop advice
+        advice = recommender.get_shop_advice(
+            my_champs, shop_champs, recs, level, gold, opponents
+        )
+
+        return jsonify(advice)
 
     @app.route("/api/champions")
     def api_champions():
